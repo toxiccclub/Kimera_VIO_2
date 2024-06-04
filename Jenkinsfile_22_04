@@ -55,6 +55,7 @@ pipeline {
               steps {
                 wrap([$class: 'Xvfb']) {
                   sh 'cd build && ./testKimeraVIO --gtest_output="xml:testresults.xml"'
+                   junit 'build/testresults.xml'
                 }
               }
             }
