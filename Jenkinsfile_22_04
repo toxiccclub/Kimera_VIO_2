@@ -54,8 +54,7 @@ pipeline {
             stage('Test') {
               steps {
                 wrap([$class: 'Xvfb']) {
-                  sh 'cd build && ./testKimeraVIO --gtest_output="xml:testresults.xml" --minloglevel=0 -v=1'
-                  junit 'build/testresults.xml'
+                  sh 'cd build && ./testKimeraVIO --gtest_output="xml:testresults.xml"'
                 }
               }
             }
