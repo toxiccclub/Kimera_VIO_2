@@ -101,7 +101,7 @@ RUN git clone https://github.com/dorian3d/DBoW2.git && \
     mkdir build && \
     cd build && \
     cmake \
-          -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release .. && \
+         .. && \
     make -j$(nproc) install
 
 # Загружаем версию разработки репозитория RobustPGO
@@ -110,14 +110,5 @@ RUN git clone https://github.com/MIT-SPARK/Kimera-RPGO.git && \
     mkdir build && \
     cd build && \
     cmake \
-          -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release .. && \
+          .. && \
     make -j$(nproc) install
-
-RUN apt-get update && apt-get install -y libgflags2.2 libgflags-dev libgoogle-glog0v5 libgoogle-glog-dev
-RUN apt-get update && apt-get install -y libgl1-mesa-dev libglew-dev
-RUN git clone https://github.com/stevenlovegrove/Pangolin.git
-RUN cd Pangolin && \
-      mkdir build && \
-      cd build && \
-      cmake .. && \
-      make -j$(nproc)
