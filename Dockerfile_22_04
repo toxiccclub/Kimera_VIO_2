@@ -1,5 +1,5 @@
 # Указываем базовый образ для архитектуры ARM64
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # Метаданные об обслуживании образа
 LABEL maintainer="mabate@mit.edu"
