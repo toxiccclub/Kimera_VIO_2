@@ -76,7 +76,7 @@ ENV BOOST_ROOT /usr/local/boost
 ADD https://api.github.com/repos/borglab/gtsam/git/refs/heads/master version.json
 RUN git clone https://github.com/borglab/gtsam.git && \
     cd gtsam && \
-    git checkout 0c3e05f375c03c5ff5218e708db416b38f4113c8 && \
+    git checkout 30f4dbb1b80f274bbd9e82a18fb2831110e058f0 && \
     mkdir build && \
     cd build && \
     cmake \
