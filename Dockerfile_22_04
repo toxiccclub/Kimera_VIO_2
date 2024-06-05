@@ -80,18 +80,11 @@ RUN git clone https://github.com/borglab/gtsam.git && \
     mkdir build && \
     cd build && \
     cmake \
-          -DCMAKE_INSTALL_PREFIX=/usr/local \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DGTSAM_POSE3_EXPMAP=ON \
-          -DGTSAM_BUILD_TEST=OFF \
-          -DGTSAM_ROT3_EXPMAP=ON \
-          -DGTSAM_TANGENT_PREINTEGRATION=OFF \
-          -DGTSAM_USE_SYSTEM_EIGEN=OFF  \
-          -DGTSAM_THROW_CHEIRALITY_EXCEPTION=OFF \
+         cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release -DGTSAM_USE_SYSTEM_EIGEN=OFF -DGTSAM_POSE3_EXPMAP=ON -DGTSAM_ROT3_EXPMAP=ON -DGTSAM_TANGENT_PREINTEGRATION=OFF ..
           .. && \
     make -j$(nproc) install
 
-#ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # Загружаем версию разработки репозитория Open_GV
 RUN git clone https://github.com/laurentkneip/opengv.git && \
