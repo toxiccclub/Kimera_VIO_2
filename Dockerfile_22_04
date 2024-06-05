@@ -36,18 +36,18 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Скачиваем и устанавливаем Boost
-RUN wget --no-check-certificate https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.bz2 && \
-    tar -xjf boost_1_82_0.tar.bz2 && \
-    cd boost_1_82_0 &&  \
-    ./bootstrap.sh --prefix=/usr/local/boost --with-libraries=all && \
-    ./b2 install -j$(nproc) && \
-    cd .. 
+#RUN wget --no-check-certificate https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.bz2 && \
+    #tar -xjf boost_1_82_0.tar.bz2 && \
+    #cd boost_1_82_0 &&  \
+    #./bootstrap.sh --prefix=/usr/local/boost --with-libraries=all && \
+    #./b2 install -j$(nproc) && \
+    #cd .. 
 
-RUN echo "/usr/local/boost/lib" > /etc/ld.so.conf.d/boost.conf && \
-    ldconfig
+#RUN echo "/usr/local/boost/lib" > /etc/ld.so.conf.d/boost.conf && \
+    #ldconfig
 
 # Экспортируем переменную среды BOOST_ROOT
-ENV BOOST_ROOT /usr/local/boost
+#ENV BOOST_ROOT /usr/local/boost
 
 RUN git clone https://github.com/borglab/gtsam.git && \
     cd gtsam && \
