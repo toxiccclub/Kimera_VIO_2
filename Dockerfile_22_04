@@ -49,7 +49,6 @@ RUN echo "/usr/local/boost/lib" > /etc/ld.so.conf.d/boost.conf && \
 # Экспортируем переменную среды BOOST_ROOT
 ENV BOOST_ROOT /usr/local/boost
 
-ADD https://api.github.com/repos/borglab/gtsam/git/refs/heads/develop version.json
 RUN git clone https://github.com/borglab/gtsam.git && \
     cd gtsam && \
     git checkout tags/4.1.1 && \
@@ -102,10 +101,8 @@ RUN git clone https://github.com/laurentkneip/opengv.git && \
 #RUN cd opengv/build && make test
 
 # Клонируем репозиторий DBoW2 и устанавливаем его
-COPY .patches/fix_vocab.patch dbow2.patch
 RUN git clone https://github.com/dorian3d/DBoW2.git && \
     cd DBoW2 && \
-    git apply ../dbow2.patch && \
     mkdir build && \
     cd build && \
     cmake \
