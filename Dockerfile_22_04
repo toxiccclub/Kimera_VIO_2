@@ -74,13 +74,14 @@ ENV BOOST_ROOT /usr/local/boost
 ADD https://api.github.com/repos/borglab/gtsam/git/refs/heads/master version.json
 RUN git clone https://github.com/borglab/gtsam.git && \
     cd gtsam && \
-    git checkout tags/4.2.0 && \
+    git checkout tags/4.1.1 && \
     mkdir build && \
     cd build && \
     cmake \
           -DCMAKE_INSTALL_PREFIX=/usr/local \
           -DCMAKE_BUILD_TYPE=Release \
           -DGTSAM_POSE3_EXPMAP=ON \
+          -DGTSAM_BUILD_TEST=OFF \
           -DGTSAM_ROT3_EXPMAP=ON \
           -DGTSAM_TANGENT_PREINTEGRATION=OFF \
           -DGTSAM_USE_SYSTEM_EIGEN=OFF  \
