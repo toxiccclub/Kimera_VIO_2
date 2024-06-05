@@ -106,7 +106,6 @@ RUN git clone https://github.com/laurentkneip/opengv.git && \
 # Клонируем репозиторий DBoW2 и устанавливаем его
 RUN git clone https://github.com/dorian3d/DBoW2.git && \
     cd DBoW2 && \
-    git checkout tags/v1.1-free && \
     mkdir build && \
     cd build && \
     cmake \
@@ -121,3 +120,7 @@ RUN git clone https://github.com/MIT-SPARK/Kimera-RPGO.git && \
     cmake \
           .. && \
     make -j$(nproc) install
+
+RUN ldconfig && \
+    echo "Checking installed libraries..." && \
+    ldconfig -p | grep -E "gtsam|opengv|DBoW2"
