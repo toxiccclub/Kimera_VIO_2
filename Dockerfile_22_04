@@ -49,23 +49,6 @@ RUN apt-get update && \
 # Экспортируем переменную среды BOOST_ROOT
 #ENV BOOST_ROOT /usr/local/boost
 
-RUN git clone https://github.com/borglab/gtsam.git && \
-    cd gtsam && \
-    git checkout tags/4.1.1 && \
-    mkdir build && \
-    cd build && \
-    cmake \
-          -DCMAKE_INSTALL_PREFIX=/usr/local \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DGTSAM_POSE3_EXPMAP=ON \
-          -DGTSAM_ROT3_EXPMAP=ON \
-          -DGTSAM_TANGENT_PREINTEGRATION=OFF \
-          -DGTSAM_USE_SYSTEM_EIGEN=OFF  \
-          .. && \
-    make -j$(nproc) install
-
-ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-
 # Клонирование репозиториев OpenCV и OpenCV_contrib
 RUN git clone https://github.com/opencv/opencv.git && \
     git clone https://github.com/opencv/opencv_contrib.git && \
@@ -85,6 +68,17 @@ RUN git clone https://github.com/opencv/opencv.git && \
     .. && \
 make -j$(nproc) install
 
+RUN apt-get update && apt-get install -y libboost-all-dev libtbb-dev
+ADD https://api.github.com/repos/borglab/gtsam/git/refs/heads/master version.json
+RUN git clone https://github.com/borglab/gtsam.git
+RUN cd gtsam && \
+    git fetch && \
+    git checkout develop && \
+    mkdir build && \
+    cd build && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DGTSAM_USE_SYSTEM_EIGEN=OFF -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DCMAKE_BUILD_TYPE=Release -DGTSAM_BUILD_UNSTABLE=ON -DGTSAM_POSE3_EXPMAP=ON -DGTSAM_ROT3_EXPMAP=ON -DGTSAM_TANGENT_PREINTEGRATION=OFF .. && \
+    make -j$(nproc) install
+
 # Загружаем версию разработки репозитория Open_GV
 RUN git clone https://github.com/laurentkneip/opengv.git && \
     cd opengv && \
@@ -97,8 +91,6 @@ RUN git clone https://github.com/laurentkneip/opengv.git && \
           -DEIGEN_INCLUDE_DIRS=$DIRPATH/gtsam/gtsam/3rdparty/Eigen \
           .. && \
     make -j$(nproc) install
-
-#RUN cd opengv/build && make test
 
 # Клонируем репозиторий DBoW2 и устанавливаем его
 RUN git clone https://github.com/dorian3d/DBoW2.git && \
