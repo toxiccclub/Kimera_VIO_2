@@ -75,7 +75,6 @@ RUN git clone https://github.com/opencv/opencv.git && \
     -D BUILD_opencv_python=OFF \
     -D BUILD_opencv_python2=OFF \
     -D BUILD_opencv_python3=OFF \
-    -DWITH_TBB=ON \
     -DWITH_VTK=ON \
     -DOPENCV_EXTRA_MODULES_PATH=$DIRPATH/opencv_contrib/modules \
     .. && \
