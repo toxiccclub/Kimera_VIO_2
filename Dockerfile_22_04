@@ -24,7 +24,7 @@ RUN apt-get update && \
       libgtk-3-dev \
       libparmetis-dev \
       libatlas-base-dev gfortran \
-      libtbb2-dev git ca-certificates \
+      libtbb-dev git ca-certificates \
       libopenjpip7 \
       libopenjp2-tools \
       libopenjpip-dec-server \
